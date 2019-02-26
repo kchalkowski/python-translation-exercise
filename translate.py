@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
-#import sys
+import sys
 
-#def translate_sequence(rna_sequence, genetic_code):
-"""Translates a sequence of RNA into a sequence of amino acids.
+def translate_sequence(rna_sequence, genetic_code):
+    """Translates a sequence of RNA into a sequence of amino acids.
     Translates `rna_sequence` into string of amino acids, according to the
     `genetic_code` given as a dict. Translation begins at the first position of
     the `rna_sequence` and continues until the first stop codon is encountered
@@ -33,17 +33,19 @@ genetic_code = {"UUU":"F", "UUC":"F", "UUA":"L", "UUG":"L",
     "GCU":"A", "GCC":"A", "GCA":"A", "GCG":"A",
     "GAU":"D", "GAC":"D", "GAA":"E", "GAG":"E",
     "GGU":"G", "GGC":"G", "GGA":"G", "GGG":"G",}
-
+rna_str = "".join(rna_seq)
 
 for i in rna_seq:
-    if
-    print(genetic_code[i])
+    if len(rna_str) > 3 and rna_seq[0] != "UAA" and rna_seq[0] != "UAG" and rna_seq[0] != "UGA": 
+        print(genetic_code[i])
+    else:
+         print("")
 
-#pass
+    pass
 
 
 #def get_all_translations(rna_sequence, genetic_code):
-"""Get a list of all amino acid sequences encoded by an RNA sequence.
+    """Get a list of all amino acid sequences encoded by an RNA sequence.
 
     All three reading frames of `rna_sequence` are scanned from 'left' to
     'right', and the generation of a sequence of amino acids is started
@@ -57,6 +59,28 @@ for i in rna_seq:
     If no amino acids can be translated from `rna_sequence`, an empty list is
     returned.
     """
+
+#rna_str[i:i+3] for i in range(1, len(RNA_str), 3)
+rna_2 = [rna_str[i:i+3] for i in range(1, len(rna_str), 3)]
+rna_3 = [rna_str[i:i+3] for i in range(2, len(rna_str), 3)]
+
+
+for i in rna_seq, rna_2, rna_3:
+    if i == "AUG":
+        print(genetic_code[i])
+    else:
+        print("")
+#for i in rna_2:
+#    if i == "AUG":
+#        print(genetic_code[i])
+#    else:
+#        print("")
+#for i in rna_3:
+#    if i == "AUG":
+#        print(genetic_code[i])
+#    else:
+#        print("")
+
 #    pass
 
 #def get_reverse(sequence):
