@@ -15,7 +15,8 @@ def translate_sequence(rna_sequence, genetic_code):
 
 #[rna_seq[i:i+3] for i in range(0, len(rna_seq), 3)]
 
-rna_seq = ("AUG", "UAC", "UGG", "CAC", "GCU", "ACU", "GCU", "CCA", "UAU", "ACU", "CAC", "CAG", "AAU", "AUC", "AGU", "ACA", "GCG")
+#rna_seq = ("AUG", "UAC", "UGG", "CAC", "GCU", "ACU", "GCU", "CCA", "UAU", "ACU", "CAC", "CAG", "AAU", "AUC", "AGU", "ACA", "GCG")
+rna_seq = ("UAC", "AUG", "UGG")
 #genetic_code = {'GUC': 'V', 'ACC': 'T', 'GUA': 'V', 'GUG': 'V', 'ACU': 'T', 'AAC': 'N', 'CCU': 'P', 'UGG': 'W', 'AGC': 'S', 'AUC': 'I', 'CAU': 'H', 'AAU': 'N', 'AGU': 'S', '$
 genetic_code = {"UUU":"F", "UUC":"F", "UUA":"L", "UUG":"L",
     "UCU":"S", "UCC":"s", "UCA":"S", "UCG":"S",
@@ -34,6 +35,7 @@ genetic_code = {"UUU":"F", "UUC":"F", "UUA":"L", "UUG":"L",
     "GAU":"D", "GAC":"D", "GAA":"E", "GAG":"E",
     "GGU":"G", "GGC":"G", "GGA":"G", "GGG":"G",}
 rna_str = "".join(rna_seq)
+rna_list = list(rna_seq)
 
 for i in rna_seq:
     if len(rna_str) > 3 and rna_seq[0] != "UAA" and rna_seq[0] != "UAG" and rna_seq[0] != "UGA": 
@@ -44,7 +46,7 @@ for i in rna_seq:
     pass
 
 
-#def get_all_translations(rna_sequence, genetic_code):
+def get_all_translations(rna_sequence, genetic_code):
     """Get a list of all amino acid sequences encoded by an RNA sequence.
 
     All three reading frames of `rna_sequence` are scanned from 'left' to
@@ -64,33 +66,53 @@ for i in rna_seq:
 rna_2 = [rna_str[i:i+3] for i in range(1, len(rna_str), 3)]
 rna_3 = [rna_str[i:i+3] for i in range(2, len(rna_str), 3)]
 
-
-for i in rna_seq, rna_2, rna_3:
-    if i == "AUG":
-        print(genetic_code[i])
-    else:
-        print("")
-#for i in rna_2:
+#for i in rna_seq, rna_2, rna_3:
 #    if i == "AUG":
 #        print(genetic_code[i])
 #    else:
 #        print("")
+
+if "AUG" in rna_seq:
+    for i in rna_seq[rna_seq.index("AUG")::]:
+        print(genetic_code[i])
+    else: print("")
+
+if "AUG" in rna_2:
+    for i in rna_2[rna_seq.index("AUG")::]:
+        print(genetic_code[i])
+    else: print("")
+
+if "AUG" in rna_3:
+    for i in rna_3[rna_seq.index("AUG")::]:
+        print(genetic_code[i])
+    else: print("")
+
+#for i in rna_seq[rna_seq.index("AUG")::], rna_2[rna_2.index("AUG")::], rna_3[rna_3.index("AUG")::]:
+#    print(genetic_code[i])
+#else:
+#    print("")
+
 #for i in rna_3:
 #    if i == "AUG":
 #        print(genetic_code[i])
 #    else:
 #        print("")
 
-#    pass
+    pass
 
-#def get_reverse(sequence):
-"""Reverse orientation of `sequence`.
+def get_reverse(sequence):
+    """Reverse orientation of `sequence`.
 
     Returns a string with `sequence` in the reverse order.
 
     If `sequence` is empty, an empty string is returned.
     """
-#    pass
+if len(rna_seq) != 0:
+    print(rna_list.reverse())
+else:
+    print("")
+
+    pass
 
 #def get_complement(sequence):
 """Get the complement of `sequence`.
