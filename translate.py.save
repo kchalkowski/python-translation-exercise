@@ -41,8 +41,8 @@ import sys
 #    "GGU":"G", "GGC":"G", "GGA":"G", "GGG":"G",}
 
 
-def translate_sequence(rna_sequence, genetic_code):
-    """Translates a sequence of RNA into a sequence of amino acids.
+#def translate_sequence(rna_sequence, genetic_code):
+"""Translates a sequence of RNA into a sequence of amino acids.
     Translates `rna_sequence` into string of amino acids, according to the
     `genetic_code` given as a dict. Translation begins at the first position of
     the `rna_sequence` and continues until the first stop codon is encountered
@@ -51,16 +51,16 @@ def translate_sequence(rna_sequence, genetic_code):
     If `rna_sequence` is less than 3 bases long, or starts with a stop codon,
     an empty string is returned.
     """
-    sequence = rna_sequence.upper()
-    genetic_code = {"UUU":"F", "UUC":"F", "UUA":"L", "UUG":"L", "UCU":"S", "UCC":"s", "UCA":"S", "UCG":"S", "UAU":"Y", "UAC":"Y", "UAA":"STOP", "UAG":"STOP", "UGU":"C", "UGC":"C", "UGA":"STOP", "UGG":"W", "CUU":"L", "CUC":"L", "CUA":"L", "CUG":"L", "CCU":"P", "CCC":"P", "CCA":"P", "CCG":"P", "CAU":"H", "CAC":"H", "CAA":"Q", "CAG":"Q", "CGU":"R", "CGC":"R", "CGA":"R", "CGG":"R", "AUU":"I", "AUC":"I", "AUA":"I", "AUG":"M", "ACU":"T", "ACC":"T", "ACA":"T", "ACG":"T", "AAU":"N", "AAC":"N", "AAA":"K", "AAG":"K", "AGU":"S", "AGC":"S", "AGA":"R", "AGG":"R", "GUU":"V", "GUC":"V", "GUA":"V", "GUG":"V", "GCU":"A", "GCC":"A", "GCA":"A", "GCG":"A", "GAU":"D", "GAC":"D", "GAA":"E", "GAG":"E", "GGU":"G", "GGC":"G", "GGA":"G", "GGG":"G",}
-    rna_list = [sequence[i:i+3] for i in range(0, len(sequence), 3)]
-    for i in rna_list:
-        if len(sequence) < 3 or rna_list[0] == "UAA" or rna_list[0] == "UAG" or rna_list[0] == "UGA":
-            return ""
-        else:
-            return genetic_code[i]
+#    genetic_code = {"UUU":"F", "UUC":"F", "UUA":"L", "UUG":"L", "UCU":"S", "UCC":"s", "UCA":"S", "UCG":"S", "UAU":"Y", "UAC":"Y", "UAA":"STOP", "UAG":"STOP", "UGU":"C", "UGC":"C", "UGA":"STOP", "UGG":"W", "CUU":"L", "CUC":"L", "CUA":"L", "CUG":"L", "CCU":"P", "CCC":"P", "CCA":"P", "CCG":"P", "CAU":"H", "CAC":"H", "CAA":"Q", "CAG":"Q", "CGU":"R", "CGC":"R", "CGA":"R", "CGG":"R", "AUU":"I", "AUC":"I", "AUA":"I", "AUG":"M", "ACU":"T", "ACC":"T", "ACA":"T", "ACG":"T", "AAU":"N", "AAC":"N", "AAA":"K", "AAG":"K", "AGU":"S", "AGC":"S", "AGA":"R", "AGG":"R", "GUU":"V", "GUC":"V", "GUA":"V", "GUG":"V", "GCU":"A", "GCC":"A", "GCA":"A", "GCG":"A", "GAU":"D", "GAC":"D", "GAA":"E", "GAG":"E", "GGU":"G", "GGC":"G", "GGA":"G", "GGG":"G",}
+#    rna_list = [rna_sequence[i:i+3] for i in range(0, len(rna_sequence), 3)]
+#    for i in rna_list:
+#        if len(rna_sequence) > 3 and rna_list[0] != "UAA" and rna_list[0] != "UAG" and rna_list[0] != "UGA": 
+#            out = print(genetic_code[i]))
+#        else:
+#            out = ""
+#    return out
 
-pass
+#pass
 
 
 #####################################################################################################################
@@ -85,19 +85,17 @@ def get_all_translations(rna_sequence, genetic_code):
 
     if "AUG" in rna_sequence:
         for i in rna_sequence[rna_sequence.index("AUG")::]:
-            return genetic_code[i]
-        else:
-            return ""
+            print(genetic_code[i], end = "")
+        else: print("")
     if "AUG" in rna_2:
         for i in rna_2[rna_sequence.index("AUG")::]:
-            return genetic_code[i]
-        else:
-            return ""
+            print(genetic_code[i], end = "")
+        else: print("")
     if "AUG" in rna_3:
         for i in rna_3[rna_sequence.index("AUG")::]:
-            return genetic_code[i]
-        else:
-            return ""
+            print(genetic_code[i], end = "")
+        else: print("")
+    print("\n")
 
 pass
 
@@ -116,6 +114,9 @@ def get_reverse(rna_sequence):
     sequence = rna_sequence.upper()
     rev_seq = sequence[::-1]
     return(rev_seq)
+
+if len(rev_seq) == 0:   
+    return ""
 
 #pass
 
