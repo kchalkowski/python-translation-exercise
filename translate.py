@@ -155,16 +155,21 @@ def get_complement(rna_sequence):
 
     If `sequence` is empty, an empty string is returned.
     """
-    sequence = rna_sequence.upper()
-    rna_list = [sequence[i:i+1] for i in range(0, len(sequence), 3)]
+#    sequence = rna_sequence.upper()
+#    rna_list = [sequence[i:i+1] for i in range(0, len(sequence), 3)]
     complement = {'A': 'U', 'C': 'G', 'G': 'C', 'U': 'A'}
+#
+#    if len(sequence) == 0:
+#        return ""
+#    else:
+#        for i in rna_list:
+#            return complement[i]
 
-    if len(sequence) == 0:
-        return ""
-    else:
-        for i in rna_list:
-            return complement[i]
-
+#jamies code
+    comp_seq = ""
+    for c in rna_sequence:
+        comp_seq += complement[c]
+        return comp_seq
 pass
 
 #####################################################################################################################
