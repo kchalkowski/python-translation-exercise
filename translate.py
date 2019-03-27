@@ -1,45 +1,7 @@
+
 #!/usr/bin/env python3
 
 import sys
-
-#if __name__ == '__main__':
-#     rna_seq = ("AUG", "UAC", "UGG", "CAC", "GCU", "ACU", "GCU", "CCA", "UAU", "ACU", "CAC", "CAG", "AAU", "AUC", "AGU", "ACA", "GCG")
-#    genetic_code = {"UUU":"F", "UUC":"F", "UUA":"L", "UUG":"L",
-#    "UCU":"S", "UCC":"s", "UCA":"S", "UCG":"S",
-#    "UAU":"Y", "UAC":"Y", "UAA":"STOP", "UAG":"STOP",
-#    "UGU":"C", "UGC":"C", "UGA":"STOP", "UGG":"W",
-#    "CUU":"L", "CUC":"L", "CUA":"L", "CUG":"L",
-#    "CCU":"P", "CCC":"P", "CCA":"P", "CCG":"P",
-#    "CAU":"H", "CAC":"H", "CAA":"Q", "CAG":"Q",
-#    "CGU":"R", "CGC":"R", "CGA":"R", "CGG":"R",
-#    "AUU":"I", "AUC":"I", "AUA":"I", "AUG":"M",
-#    "ACU":"T", "ACC":"T", "ACA":"T", "ACG":"T",
-#    "AAU":"N", "AAC":"N", "AAA":"K", "AAG":"K",
-#    "AGU":"S", "AGC":"S", "AGA":"R", "AGG":"R",
-#    "GUU":"V", "GUC":"V", "GUA":"V", "GUG":"V",
-#    "GCU":"A", "GCC":"A", "GCA":"A", "GCG":"A",
-#    "GAU":"D", "GAC":"D", "GAA":"E", "GAG":"E",
-#    "GGU":"G", "GGC":"G", "GGA":"G", "GGG":"G",}
-
-#rna_seq = ("AUG", "UAC", "UGG", "CAC", "GCU", "ACU", "GCU", "CCA", "UAU", "ACU", "CAC", "CAG", "AAU", "AUC", "AGU", "ACA", "GCG")
-#genetic_code = 
-#    {"UUU":"F", "UUC":"F", "UUA":"L", "UUG":"L",
-#    "UCU":"S", "UCC":"s", "UCA":"S", "UCG":"S",
-#    "UAU":"Y", "UAC":"Y", "UAA":"STOP", "UAG":"STOP",
-#    "UGU":"C", "UGC":"C", "UGA":"STOP", "UGG":"W",
-#    "CUU":"L", "CUC":"L", "CUA":"L", "CUG":"L",
-#    "CCU":"P", "CCC":"P", "CCA":"P", "CCG":"P",
-#    "CAU":"H", "CAC":"H", "CAA":"Q", "CAG":"Q",
-#    "CGU":"R", "CGC":"R", "CGA":"R", "CGG":"R",
-#    "AUU":"I", "AUC":"I", "AUA":"I", "AUG":"M",
-#    "ACU":"T", "ACC":"T", "ACA":"T", "ACG":"T",
-#    "AAU":"N", "AAC":"N", "AAA":"K", "AAG":"K",
-#    "AGU":"S", "AGC":"S", "AGA":"R", "AGG":"R",
-#    "GUU":"V", "GUC":"V", "GUA":"V", "GUG":"V",
-#    "GCU":"A", "GCC":"A", "GCA":"A", "GCG":"A",
-#    "GAU":"D", "GAC":"D", "GAA":"E", "GAG":"E",
-#    "GGU":"G", "GGC":"G", "GGA":"G", "GGG":"G",}
-
 
 def translate_sequence(rna_sequence, genetic_code):
     """Translates a sequence of RNA into a sequence of amino acids.
@@ -59,10 +21,10 @@ def translate_sequence(rna_sequence, genetic_code):
         return ""
     else:
         for i in rna_list:
-            if rna_list[0] == "UAA" or rna_list[0] == "UAG" or rna_list[0] == "UGA":
+            if str(rna_list[0]) == "UAA" or str(rna_list[0]) == "UAG" or str(rna_list[0]) == "UGA":
                 return ""
             else:
-                while rna_list[i] != "UAA" or "UAG" or "UGA":
+                while i != "UAA" or "UAG" or "UGA":
                     return genetic_code[i]
 #for i in rna_list:
 #        if len(sequence) < 3 or rna_list[0] == "UAA" or rna_list[0] == "UAG" or rna_list[0] == "UGA":
@@ -74,6 +36,33 @@ pass
 
 
 #####################################################################################################################
+#======================================================================
+#FAIL: test_two_short_peptides (__main__.TestGetAllTranslations)
+#----------------------------------------------------------------------
+#Traceback (most recent call last):
+#  File "test_translate.py", line 224, in test_two_short_peptides
+#    expected_results = expected_amino_acid_seqs)
+#  File "test_translate.py", line 49, in run_get_all_translations
+#    self.assertEqual(amino_acid_seqs, expected_results, message)
+#AssertionError: Lists differ: [] != ['MTAVRYV', 'MTYV']
+#
+#Second list contains 2 additional elements.
+#First extra element 0:
+#MTAVRYV
+#
+#- []
+#+ ['MTAVRYV', 'MTYV'] : 
+#
+#Calling `get_all_translations` with `rna_sequence`:
+#    'CCUGAAUGACGUACGUAUGACUGCAGUACGUUACGUACG'
+#Expecting ['MTYV', 'MTAVRYV'], but [] was returned
+#
+
+#CCU GAA UGA CGU ACG UAU GAC UGC AGU ACG UUA CGU ACG
+#C CUG AAU GAC GUA CGU //AUG ACU GCA GUA CGU UAC GUA CG
+#CC UGA //AUG ACG UAC GUA UGA CUG CAG UAC GUU ACG UAC G
+
+
 def get_all_translations(rna_sequence, genetic_code):
     """Get a list of all amino acid sequences encoded by an RNA sequence.
 
@@ -89,7 +78,7 @@ def get_all_translations(rna_sequence, genetic_code):
     If no amino acids can be translated from `rna_sequence`, an empty list is
     returned.
     """
-    sequence = rna_sequence.upper
+    sequence = rna_sequence.upper()
     genetic_code = {"UUU":"F", "UUC":"F", "UUA":"L", "UUG":"L",
     "UCU":"S", "UCC":"S", "UCA":"S", "UCG":"S",
     "UAU":"Y", "UAC":"Y", "UAA":"STOP", "UAG":"STOP",
@@ -111,22 +100,21 @@ def get_all_translations(rna_sequence, genetic_code):
     rna_2 = [sequence[i:i+3] for i in range(1, len(sequence), 3)]
     rna_3 = [sequence[i:i+3] for i in range(2, len(sequence), 3)]
 
-    if "AUG" not in rna_1:
-        return ""
-    else:
-        for i in rna_1[rna_1.index("AUG")::]:
-            return genetic_code[i]
-    if "AUG" not in rna_2:
-        return ""
-    else:
-        for i in rna_2[rna_2.index("AUG")::]:
-            return genetic_code[i]
-    if "AUG" not in rna_3:
-        return ""
-    else:
-        for i in rna_3[rna_3.index("AUG")::]:
-            return genetic_code[i]
-
+    if "AUG" not in rna_1 and "AUG" not in rna_2 and "AUG" not in rna_3:
+        return []
+    while "AUG" in rna_1:
+        for i in rna_1[rna_1.index("AUG"):]:
+            x = genetic_code[i]
+#        for i in rna_1[i]:
+#            if i == "AUG"
+#                return genetic_code[i]
+    while "AUG" in rna_2:
+        for i in rna_2[rna_2.index("AUG"):]:
+            y = genetic_code[i]
+    while "AUG" in rna_3:
+        for i in rna_3[rna_3.index("AUG"):]:
+            z = genetic_code[i]
+#    return [x, y, z]
 pass
 
 #####################################################################################################################
@@ -155,21 +143,21 @@ def get_complement(rna_sequence):
 
     If `sequence` is empty, an empty string is returned.
     """
-#    sequence = rna_sequence.upper()
-#    rna_list = [sequence[i:i+1] for i in range(0, len(sequence), 3)]
+    sequence = rna_sequence.upper()
+    rna_list = [sequence[i:i+1] for i in range(0, len(sequence), 3)]
     complement = {'A': 'U', 'C': 'G', 'G': 'C', 'U': 'A'}
-#
-#    if len(sequence) == 0:
-#        return ""
-#    else:
-#        for i in rna_list:
-#            return complement[i]
+
+    if len(sequence) == 0:
+        return ""
+    else:
+        for i in rna_list:
+            return complement[i]
 
 #jamies code
-    comp_seq = ""
-    for c in rna_sequence:
-        comp_seq += complement[c]
-        return comp_seq
+#    comp_seq = ""
+#    for c in rna_sequence:
+#        comp_seq += complement[c]
+#        return comp_seq
 pass
 
 #####################################################################################################################
@@ -222,9 +210,9 @@ def get_longest_peptide(rna_sequence, genetic_code):
     rna_b = [sequence[i:i+3] for i in range(1, len(sequence), 3)]
     rna_c = [sequence[i:i+3] for i in range(2, len(sequence), 3)]
 
-    rev_rna_a = get_reverse(rna_1)
-    rev_rna_b = get_reverse(rna_2)
-    rev_rna_c = get_reverse(rna_3)
+    rev_rna_a = get_reverse(rna_a)
+    rev_rna_b = get_reverse(rna_b)
+    rev_rna_c = get_reverse(rna_c)
 
     rna_1 = get_all_translations(rna_a, genetic_code)
     rna_2 = get_all_translations(rna_b, genetic_code)
@@ -249,33 +237,31 @@ def get_longest_peptide(rna_sequence, genetic_code):
         return "".join(rna_1)
 
 
-#longest_peptide = get_longest_peptide(rna_sequence = rna_seq, genetic_code = genetic_code)
-
-#assert isinstance(longest_peptide, str), "Oops: the longest peptide is {0}, not a string".format(longest_peptide)
-#message = "The longest peptide encoded by\n\t'{0}'\nis\n\t'{1}'\n".format(rna_seq, longest_peptide)
-#sys.stdout.write(message)
-#if longest_peptide == "MYWHATAPYTHQNISTA":
-#    sys.stdout.write("Indeed.\n")
-
-#    pass
-
-
-#if __name__ == '__main__':
-#    genetic_code = {'GUC': 'V', 'ACC': 'T', 'GUA': 'V', 'GUG': 'V', 'ACU': 'T', 'AAC': 'N', 'CCU': 'P', 'UGG': 'W', 'AGC': 'S', 'AUC': 'I', 'CAU': 'H', 'AAU': 'N', 'AGU': 'S', 'GUU': 'V', 'CAC': 'H', 'ACG': 'T', 'CCG': 'P', 'CCA': 'P', 'ACA': 'T', 'CCC': 'P', 'UGU': 'C', 'GGU': 'G', 'UCU': 'S', 'GCG': 'A', 'UGC': 'C', 'CAG': 'Q', 'GAU': 'D', 'UAU': 'Y', 'CGG': 'R', 'UCG': 'S', 'AGG': 'R', 'GGG': 'G', 'UCC': 'S', 'UCA': 'S', 'UAA': '*', 'GGA': 'G', 'UAC': 'Y', 'GAC': 'D', 'UAG': '*', 'AUA': 'I', 'GCA': 'A', 'CUU': 'L', 'GGC': 'G', 'AUG': 'M', 'CUG': 'L', 'GAG': 'E', 'CUC': 'L', 'AGA': 'R', 'CUA': 'L', 'GCC': 'A', 'AAA': 'K', 'AAG': 'K', 'CAA': 'Q', 'UUU': 'F', 'CGU': 'R', 'CGC': 'R', 'CGA': 'R', 'GCU': 'A', 'GAA': 'E', 'AUU': 'I', 'UUG': 'L', 'UUA': 'L', 'UGA': '*', 'UUC': 'F'}
-#    rna_seq = ("AUG"
-#            "UAC"
-#            "UGG"
-#            "CAC"
-#            "GCU"
-#            "ACU"
-#            "GCU"
-#            "CCA"
-#            "UAU"
-#            "ACU"
-#            "CAC"
-#            "CAG"
-#            "AAU"
-#            "AUC"
-#            "AGU"
-#            "ACA"
-#            "GCG")
+if __name__ == '__main__':
+    genetic_code = {'GUC': 'V', 'ACC': 'T', 'GUA': 'V', 'GUG': 'V', 'ACU': 'T', 'AAC': 'N', 'CCU': 'P', 'UGG': 'W', 'AGC': 'S', 'AUC': 'I', 'CAU': 'H', 'AAU': 'N', 'AGU': 'S', 'GUU': 'V', 'CAC': 'H', 'ACG': 'T', 'CCG': 'P', 'CCA': 'P', 'ACA': 'T', 'CCC': 'P', 'UGU': 'C', 'GGU': 'G', 'UCU': 'S', 'GCG': 'A', 'UGC': 'C', 'CAG': 'Q', 'GAU': 'D', 'UAU': 'Y', 'CGG': 'R', 'UCG': 'S', 'AGG': 'R', 'GGG': 'G', 'UCC': 'S', 'UCA': 'S', 'UAA': '*', 'GGA': 'G', 'UAC': 'Y', 'GAC': 'D', 'UAG': '*', 'AUA': 'I', 'GCA': 'A', 'CUU': 'L', 'GGC': 'G', 'AUG': 'M', 'CUG': 'L', 'GAG': 'E', 'CUC': 'L', 'AGA': 'R', 'CUA': 'L', 'GCC': 'A', 'AAA': 'K', 'AAG': 'K', 'CAA': 'Q', 'UUU': 'F', 'CGU': 'R', 'CGC': 'R', 'CGA': 'R', 'GCU': 'A', 'GAA': 'E', 'AUU': 'I', 'UUG': 'L', 'UUA': 'L', 'UGA': '*', 'UUC': 'F'}
+    rna_seq = ("AUG"
+            "UAC"
+            "UGG"
+            "CAC"
+            "GCU"
+            "ACU"
+            "GCU"
+            "CCA"
+            "UAU"
+            "ACU"
+            "CAC"
+            "CAG"
+            "AAU"
+            "AUC"
+            "AGU"
+            "ACA"
+            "GCG")
+    longest_peptide = get_longest_peptide(rna_sequence = rna_seq,
+            genetic_code = genetic_code)
+    assert isinstance(longest_peptide, str), "Oops: the longest peptide is {0}, not a string".format(longest_peptide)
+    message = "The longest peptide encoded by\n\t'{0}'\nis\n\t'{1}'\n".format(
+            rna_seq,
+            longest_peptide)
+    sys.stdout.write(message)
+    if longest_peptide == "MYWHATAPYTHQNISTA":
+        sys.stdout.write("Indeed.\n")
